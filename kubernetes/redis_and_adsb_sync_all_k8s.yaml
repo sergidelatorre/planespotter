@@ -1,10 +1,14 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: redis-server
   namespace: planespotter
 spec:
+  selector:
+    matchLabels:
+      app: redis-server
+      tier: backend
   replicas: 1
   template:
     metadata:
@@ -33,7 +37,7 @@ spec:
     app: redis-server
     tier: backend
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: adsb-sync
